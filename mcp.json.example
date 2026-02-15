@@ -1,0 +1,31 @@
+{
+  "mcpServers": {
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer YOUR_GITHUB_PAT"
+      }
+    },
+    "firecrawl-mcp": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "YOUR_FIRECRAWL_API_KEY"
+      }
+    },
+    "windows-mcp": {
+      "command": "uvx",
+      "args": ["windows-mcp"],
+      "env": {
+        "ANONYMIZED_TELEMETRY": "false"
+      }
+    },
+    "awesome-cursor-mpc-server": {
+      "command": "node",
+      "args": ["C:\\Users\\YOUR_USERNAME\\.cursor\\skills\\awesome-cursor-mpc-server\\build\\index.js"],
+      "env": {
+        "OPENAI_API_KEY": "YOUR_OPENAI_API_KEY"
+      }
+    }
+  }
+}

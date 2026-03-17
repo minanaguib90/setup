@@ -438,19 +438,18 @@ if (-not [string]::IsNullOrWhiteSpace($openaiKey)) {
 # Install Python dependencies for bundled skills when Python is available
 $deepThinkingRequirements = Join-Path $skills "deep-thinking-multi-model\scripts\requirements.txt"
 if (Test-Path $deepThinkingRequirements) {
-    $pythonCommand = if (Get-Command py -ErrorAction SilentlyContinue) {
-        "py"
-    } elseif (Get-Command python -ErrorAction SilentlyContinue) {
+    $pythonCommand = if (Get-Command python -ErrorAction SilentlyContinue) {
         "python"
+    } elseif (Get-Command py -ErrorAction SilentlyContinue) {
+        "py"
     } else {
         $null
     }
 
     if ($pythonCommand) {
         Write-Host "Installing deep-thinking-multi-model Python dependencies..." -ForegroundColor Cyan
-        try {
-            & $pythonCommand -m pip install -r $deepThinkingRequirements
-        } catch {
+        & $pythonCommand -m pip install -r $deepThinkingRequirements
+        if ($LASTEXITCODE -ne 0) {
             Write-Host "Warning: Could not install Python requirements for deep-thinking-multi-model." -ForegroundColor Yellow
         }
     } else {
@@ -474,7 +473,20 @@ if (Test-Path $mcpServer) {
     Write-Host "awesome-cursor-mpc-server repo not found; skipping build." -ForegroundColor Yellow
 }
 
+# Run automated post-setup verification
+$verifyScript = Join-Path $repoRoot "verify-setup.ps1"
+if (Test-Path $verifyScript) {
+    Write-Host "Running automated post-setup verification..." -ForegroundColor Cyan
+    & $verifyScript -CursorPath $cursor -TasksPath $tasksDir -RepoRoot $repoRoot
+    if ($LASTEXITCODE -ne 0) {
+        throw "Post-setup verification failed. Review the output above before using this Cursor install."
+    }
+} else {
+    Write-Host "Verification script not found: $verifyScript" -ForegroundColor Yellow
+}
+
 Write-Host "`nDone. Next steps:" -ForegroundColor Green
 Write-Host "1. Confirm $cursor\mcp.json, $cursor\hooks.json, $rulesDir, and $tasksDir\Lessons.md are present"
 Write-Host "2. Restart Cursor so MCP servers, hooks, rules, and new environment variables are picked up"
 Write-Host "3. In Cursor, verify browser-devtools, context-mode, and any optional MCP servers you enabled are green"
+Write-Host "4. You can rerun verification anytime with .\verify-setup.ps1"

@@ -10,6 +10,7 @@ This repo also bundles:
 - a persistent `Tasks/Lessons.md` file
 - [context-mode](https://github.com/mksglu/context-mode) MCP and hooks for context saving and session continuity
 - `browser-devtools` MCP so the agent can use web UIs and admin dashboards when that is the right path
+- an automated post-setup verification script so a new machine can self-check the installed Cursor state
 
 ## Prerequisites
 
@@ -163,7 +164,28 @@ From the repo root (where this README lives), you can run:
 .\setup.ps1
 ```
 
-It will create directories, clone the skill repos, copy all bundled repo-local skills into `%USERPROFILE%\.cursor\skills`, install `context-mode`, install the bundled hooks and rules, create `Tasks\Lessons.md` if missing, prompt interactively for MCP/API configuration, install the Python requirements for `deep-thinking-multi-model` when Python is available, and build awesome-cursor-mpc-server. In the normal path, there is no separate manual MCP/path editing step after the script finishes. Restart Cursor when it completes.
+It will create directories, clone the skill repos, copy all bundled repo-local skills into `%USERPROFILE%\.cursor\skills`, install `context-mode`, install the bundled hooks and rules, create `Tasks\Lessons.md` if missing, prompt interactively for MCP/API configuration, install the Python requirements for `deep-thinking-multi-model` when Python is available, build awesome-cursor-mpc-server, and then run an automated post-setup verification step. In the normal path, there is no separate manual MCP/path editing step after the script finishes. Restart Cursor when it completes.
+
+---
+
+## 8. Automated verification
+
+This repo includes `verify-setup.ps1`, which checks the installed Cursor state after setup. It verifies:
+
+- `%USERPROFILE%\.cursor\mcp.json` and `%USERPROFILE%\.cursor\hooks.json` exist and parse as JSON
+- required MCP entries like `browser-devtools` and `context-mode` are present
+- bundled rules and skills were copied into the expected Cursor directories
+- `%USERPROFILE%\Tasks\Lessons.md` exists
+- required commands such as `npm`, `npx`, and `context-mode` are available
+- optional bundled components such as `awesome-cursor-mpc-server` and `deep-thinking-multi-model` look usable when they are enabled
+
+`setup.ps1` runs this automatically at the end and fails the setup if required checks fail.
+
+You can rerun it manually any time:
+
+```powershell
+.\verify-setup.ps1
+```
 
 ---
 
@@ -177,6 +199,7 @@ It will create directories, clone the skill repos, copy all bundled repo-local s
 | `rules/` | Always-apply global Cursor rules copied into `%USERPROFILE%\.cursor\rules` |
 | `Tasks/Lessons.md` | Persistent lesson ledger copied to `%USERPROFILE%\Tasks\Lessons.md` if missing |
 | `setup.ps1` | Optional script to clone skills and build awesome-cursor-mpc-server |
+| `verify-setup.ps1` | Automated post-setup verification for MCP, hooks, rules, skills, lessons, and dependencies |
 | `skills/master-voip-engineer/` | Bundled master telecom skill for VoIP troubleshooting and PBX design |
 | `deep-thinking-multi-model/` | Bundled multi-model analysis skill copied into Cursor skills during setup |
 
@@ -186,6 +209,9 @@ It will create directories, clone the skill repos, copy all bundled repo-local s
 
 - **MCP servers red / not connecting**  
   Restart Cursor. Ensure JSON in `mcp.json` is valid. For Firecrawl/OpenAI, check the values entered during setup. For Windows-MCP, ensure `uvx` is on PATH. For `context-mode`, confirm `npm install -g context-mode` succeeded and `%USERPROFILE%\.cursor\hooks.json` exists. For `browser-devtools`, confirm `npx` is available.
+
+- **Need a quick health check after setup or later changes**  
+  Run `.\verify-setup.ps1` from the repo root. It reports pass, warning, and failure states for the installed Cursor bootstrap.
 
 - **awesome-cursor-mpc-server path**  
   `setup.ps1` now resolves the path automatically from the current `%USERNAME%`. If you edit `mcp.json` manually later, make sure the full path still points to `build\index.js`.

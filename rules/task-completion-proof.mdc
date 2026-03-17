@@ -1,0 +1,11 @@
+---
+description: Require proof before closing tasks
+alwaysApply: true
+---
+
+# Task Completion Proof
+
+- Never mark a task, todo, or work item as completed until you have proved it works.
+- Proof requires running the relevant tests or validation steps, checking logs, diagnostics, or runtime output when applicable, and confirming the result matches the requested behavior.
+- Before closing a task, explicitly ask yourself whether a senior staff engineer would approve both the implementation and the evidence. If the answer is not clearly yes, keep the task open.
+- If tests or logs cannot be checked, state the gap explicitly and do not mark the task completed unless the user knowingly accepts that limitation.

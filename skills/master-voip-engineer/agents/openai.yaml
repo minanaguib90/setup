@@ -1,0 +1,4 @@
+interface:
+  display_name: "Master VoIP Engineer"
+  short_description: "Telecom-grade VoIP and PBX workflows"
+  default_prompt: "Use $master-voip-engineer to troubleshoot a VoIP fault or design a production-ready PBX deployment."

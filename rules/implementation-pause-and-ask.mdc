@@ -1,0 +1,12 @@
+---
+description: Pause and ask when implementation leaves the approved plan
+alwaysApply: true
+---
+
+# Implementation Pause And Ask
+
+- During implementation, do not make new product, architecture, configuration, workflow, or risk decisions that were not already approved in the accepted plan.
+- If you hit ambiguity, conflicting evidence, unexpected state, missing access, new scope, or a new branch of work, pause and ask for guidance before proceeding.
+- Prefer `AskQuestion` with clear multiple-choice options when that helps the user decide quickly.
+- State what changed, why the current plan no longer fully covers it, the available options, and the consequence of each option.
+- Resume implementation only after the user answers or explicitly authorizes you to choose.

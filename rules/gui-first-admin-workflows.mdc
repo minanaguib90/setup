@@ -1,0 +1,12 @@
+---
+description: Prefer admin dashboards for managed systems
+alwaysApply: true
+---
+
+# GUI-First Admin Workflows
+
+- For GUI-managed or admin-backed systems such as FreePBX, GoIP, Yeastar, hosted PBX portals, SBC dashboards, and similar telecom/admin platforms, prefer the official web UI or admin dashboard first when adding, editing, or reviewing configuration.
+- If browser automation or inspection is needed, use the available browser or MCP tools instead of jumping straight to backend file edits.
+- Do not directly edit generated backend files for GUI-managed systems when an equivalent setting exists in the UI. Example: prefer FreePBX GUI changes over manual edits to generated Asterisk config unless the user explicitly wants low-level file changes or the GUI cannot perform the task.
+- If the system is raw or file-managed with no authoritative GUI, or the user explicitly requests file-level changes, explain why a file-level path is necessary and proceed carefully.
+- If UI access, credentials, or environment details are missing, ask before switching to backend-file edits.

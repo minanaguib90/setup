@@ -1,0 +1,12 @@
+---
+description: Review plans thoroughly before implementation
+alwaysApply: true
+---
+
+# Plan Review Questionnaire
+
+- After any plan is created and before implementation starts, review it thoroughly for gaps, ambiguities, missing dependencies, risky assumptions, validation gaps, likely implementation-time decision points, and opportunities to make the plan better.
+- Suggest concrete plan improvements before execution whenever they would reduce risk, rework, or unclear ownership.
+- Collect all unresolved questions and present them with `AskQuestion` as multiple-choice options whenever possible.
+- Include questions that are likely to surface during implementation if identifying them early would help the user decide up front.
+- Do not begin implementation until the reviewed plan is sufficiently explicit or the user knowingly accepts the remaining gaps.

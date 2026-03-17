@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+    "browser-devtools": {
+      "command": "npx",
+      "args": ["-y", "browser-devtools-mcp@latest"]
+    },
     "github": {
       "url": "https://api.githubcopilot.com/mcp/",
       "headers": {
@@ -19,6 +23,9 @@
       "env": {
         "ANONYMIZED_TELEMETRY": "false"
       }
+    },
+    "context-mode": {
+      "command": "context-mode"
     },
     "awesome-cursor-mpc-server": {
       "command": "node",

@@ -1,0 +1,14 @@
+---
+description: Read and update persistent session lessons
+alwaysApply: true
+---
+
+# Session Lessons Loop
+
+- At the start of every session, read `~/Tasks/Lessons.md` on Unix-like systems or `%USERPROFILE%\Tasks\Lessons.md` on Windows.
+- If the lessons file does not exist, create it with columns for `Date`, `What went wrong`, and `Rule for next time`.
+- Apply every relevant lesson in that file before planning, editing, testing, or closing tasks.
+- After any user correction or any reusable lesson learned during the session, append a new dated entry before ending the task.
+- Keep lessons short, concrete, and reusable as rules for future sessions.
+- When lessons, global rules, bundled skills, toolkits, hooks, or bootstrap config change locally, mirror the same changes into the setup repo clone in the same workstream whenever possible.
+- If the setup repo clone or target path is unknown, ask before ending the work.

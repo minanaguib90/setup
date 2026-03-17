@@ -1,0 +1,10 @@
+---
+description: Prefer context-mode for large artifacts and session continuity
+alwaysApply: true
+---
+
+# Context Mode Preference
+
+- When `context-mode` is available, prefer it for large logs, traces, bulky file reads, web content, and long-running sessions where raw tool output would bloat context.
+- Use `context-mode` to keep raw data out of the main context window and preserve useful session continuity across compaction.
+- If `context-mode` is unavailable, say so briefly and fall back to the normal tools carefully.
